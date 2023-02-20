@@ -53,7 +53,7 @@ const App = () => {
   const filteredContacts = filterContacts();
 
 
-   return <div className="container">
+  return <div className="container">
     <div className="in_container">
       <div>
         <h2 className="title">Phonebook</h2>

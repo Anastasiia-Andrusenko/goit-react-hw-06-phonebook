@@ -23,23 +23,26 @@
 
 .btn {
   width: 40px;
+  height: 40px;
   appearance: none;
   background-color: #ebfcea;
   border-radius: 40em;
   border-style: none;
   box-shadow: #bcbfc4 0 -12px 6px inset;
-  box-sizing: border-box;
+
   color: #241b1b;
   cursor: pointer;
   display: inline-block;
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
+  line-height: 0;
   margin: 0;
   margin-left: calc(100% - 40px);
   outline: none;
-  padding: 3px;
+  padding: 8px;
   quotes: auto;
   text-align: center;
+  vertical-align: top;
   text-decoration: none;
   transition: all 0.15s;
   user-select: none;

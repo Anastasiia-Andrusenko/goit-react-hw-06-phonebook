@@ -2,6 +2,7 @@
 import css from "../ContactForm/ContactForm.module.css";
 import classNames from "classnames";
 import { nanoid } from "nanoid";
+// import { AiOutlinePlus } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 
 const ContactForm = ({ onAddContact }) => {
