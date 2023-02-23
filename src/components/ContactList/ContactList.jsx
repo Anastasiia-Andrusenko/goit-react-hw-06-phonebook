@@ -1,20 +1,38 @@
 
 import { Contact } from "./Contact/Contact";
-import PropTypes from 'prop-types';
+
+// !!!!!!!!!!!!!! підписуємося на фільтр в сторі
+import { useSelector } from "react-redux";
+import { getFilter, getContacts } from "redux/selectors";
 
 
-export const ContactList = ({ contacts, deleteContact }) => {
+
+export const ContactList = () => {
+  const filter = useSelector(getFilter);
+  const contacts = useSelector(getContacts);
+
+
+  const filterContacts = () => {
+    if (!filter) {
+      return contacts;
+    }
+
+    const normalizedValue = filter.toLowerCase();
+    const filteredContactsArray = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedValue));
+  
+    return filteredContactsArray;
+  }
+
+  const filteredContacts = filterContacts();
+
+
   return <ul className="">
-    {contacts.map((contact => <Contact key={contact.id}  contact={contact} onDelete={deleteContact} />))}
-    
+    {filteredContacts.length > 0 ? filteredContacts.map((contact =>
+      <Contact key={contact.id} contact={contact}/>
+    )) : <p> no matches ☹</p>}
   </ul>
 }
 
 
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  })).isRequired,
-  deleteContact: PropTypes.func.isRequired,
-}
 

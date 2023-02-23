@@ -1,16 +1,20 @@
 
-// import { Component } from "react";
+// !!!!!!!!!!!!!! підписуємося на фільтр в сторі
+import {useSelector, useDispatch } from "react-redux";
+import { setFilter } from "redux/actions";
+import { getFilter } from "redux/selectors";
 import css from "../Filter/Filter.module.css";
-import PropTypes from 'prop-types';
 
 
-const Filter = ({onFilterInput, filter}) => {
+const Filter = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(getFilter);
   
 const onInput = (evt) => {
     const filterValue = evt.currentTarget.value.trim();
     // console.log(filterValue);
-    onFilterInput(filterValue);
-  };
+    dispatch(setFilter(filterValue));
+};
   
   return <div className={css.box}>
       <form name="search" className={css.form}>
@@ -29,8 +33,3 @@ const onInput = (evt) => {
 }
 
 export default Filter;
-
-Filter.propTypes = {
-  onFilterInput: PropTypes.func.isRequired,
-  filter: PropTypes.string.isRequired,
-}

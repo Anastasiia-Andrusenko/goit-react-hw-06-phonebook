@@ -2,8 +2,18 @@ import css from "../Contact/Contact.module.css";
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
+import { deleteContact } from "redux/actions";
+import { useDispatch } from "react-redux";
 
-export const Contact = ({ contact, onDelete }) => {
+export const Contact = ({ contact }) => {
+
+  const dispatch = useDispatch();
+
+  const handleDeleteContact = id => {
+    const action = deleteContact(id);
+    dispatch(action);
+  }
+
   return <>
      <li className={css.item} onClick={showDetail}>
       <div className={css.contact}>
@@ -17,7 +27,7 @@ export const Contact = ({ contact, onDelete }) => {
       <button 
         type="button" 
         className={classNames(css.btn, css.visually_hidden)} 
-        onClick={() => onDelete(contact.id)}
+        onClick={() => handleDeleteContact(contact.id)}
       >
         delete
       </button>

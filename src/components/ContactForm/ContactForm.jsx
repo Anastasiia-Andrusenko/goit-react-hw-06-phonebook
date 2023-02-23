@@ -1,11 +1,15 @@
-// import { Component } from "react";
+
 import css from "../ContactForm/ContactForm.module.css";
 import classNames from "classnames";
-import { nanoid } from "nanoid";
-// import { AiOutlinePlus } from 'react-icons/ai';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from "react-redux";
+import { getContacts } from "redux/selectors";
 
-const ContactForm = ({ onAddContact }) => {
+import { addContact } from "redux/actions";
+
+const ContactForm = () => {
+
+  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
   
   const toggleForm = (evt) => {
     // console.log(evt.target);
@@ -22,26 +26,32 @@ const ContactForm = ({ onAddContact }) => {
     }
   }
 
-  const addContact = (evt) => {
-    evt.preventDefault();
-    const form = evt.target;
-    const { name, number } = form.elements;
-    const contact = {
-      name: name.value,
-      number: number.value,
-      id: nanoid(),
-    }
 
-    onAddContact(contact);
-    name.value = "";
-    number.value = "";
+  const onAddContact = (evt) => {
+    evt.preventDefault();
+    const input = evt.target;
+    const name = input.name.value;
+    const number = input.number.value;
+    // console.log(name);
+
+
+    const equalName = contacts.find(
+      element => element.name.toLowerCase() === name.toLowerCase());
+
+    if (equalName) return alert(`${equalName.name} is already in contacts.`);
+
+    const action = addContact({ name, number });
+    dispatch(action);
+    
+    input.name.value = "";
+    input.number.value = "";
   }
 
   return <div className={css.container}>
       <button type="button" className={css.btn} onClick={toggleForm}>+</button>
        <form
         className={classNames(css.visually_hidden, css.form)}
-        onSubmit={addContact}> 
+        onSubmit={onAddContact}> 
         <label className={css.label}>
           Name
           <input className={css.input}
@@ -69,7 +79,3 @@ const ContactForm = ({ onAddContact }) => {
 }
 
 export default ContactForm;
-
-ContactForm.propTypes = {
-  onAddContact: PropTypes.func.isRequired,
-}
