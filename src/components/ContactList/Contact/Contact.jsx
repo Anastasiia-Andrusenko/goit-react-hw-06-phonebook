@@ -2,7 +2,7 @@ import css from "../Contact/Contact.module.css";
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
-import { deleteContact } from "redux/actions";
+import { deleteContact } from "redux/slices/contactSlice";
 import { useDispatch } from "react-redux";
 
 export const Contact = ({ contact }) => {
@@ -50,7 +50,6 @@ const showDetail = (evt) => {
 
 Contact.propTypes = {
   contact: PropTypes.shape({
-      id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       number: PropTypes.string.isRequired,
     }).isRequired,

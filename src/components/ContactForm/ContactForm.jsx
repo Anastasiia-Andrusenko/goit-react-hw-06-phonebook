@@ -2,13 +2,12 @@
 import css from "../ContactForm/ContactForm.module.css";
 import classNames from "classnames";
 import { useSelector, useDispatch } from "react-redux";
-import { getContacts } from "redux/selectors";
 
-import { addContact } from "redux/actions";
+import { addContact } from "../../redux/slices/contactSlice";
 
 const ContactForm = () => {
 
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(store => store.contacts);
   const dispatch = useDispatch();
   
   const toggleForm = (evt) => {

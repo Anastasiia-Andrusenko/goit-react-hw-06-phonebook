@@ -1,14 +1,14 @@
 
 // !!!!!!!!!!!!!! підписуємося на фільтр в сторі
 import {useSelector, useDispatch } from "react-redux";
-import { setFilter } from "redux/actions";
-import { getFilter } from "redux/selectors";
+import { setFilter } from "redux/slices/filterSlice"; 
+
 import css from "../Filter/Filter.module.css";
 
 
 const Filter = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(getFilter);
+  const filter = useSelector(store => store.filter);
   
 const onInput = (evt) => {
     const filterValue = evt.currentTarget.value.trim();

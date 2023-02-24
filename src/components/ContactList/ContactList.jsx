@@ -1,16 +1,13 @@
 
 import { Contact } from "./Contact/Contact";
-
-// !!!!!!!!!!!!!! підписуємося на фільтр в сторі
 import { useSelector } from "react-redux";
-import { getFilter, getContacts } from "redux/selectors";
 
 
+import css from '../ContactList/ContactList.module.css';
 
 export const ContactList = () => {
-  const filter = useSelector(getFilter);
-  const contacts = useSelector(getContacts);
-
+  const contacts = useSelector(store => store.contacts);
+  const filter = useSelector(store => store.filter);
 
   const filterContacts = () => {
     if (!filter) {
@@ -27,10 +24,11 @@ export const ContactList = () => {
   const filteredContacts = filterContacts();
 
 
+
   return <ul className="">
     {filteredContacts.length > 0 ? filteredContacts.map((contact =>
       <Contact key={contact.id} contact={contact}/>
-    )) : <p> no matches ☹</p>}
+    )) : <p className={css.message}> no matches <span className={css.smile}>☹</span></p>}
   </ul>
 }
 
